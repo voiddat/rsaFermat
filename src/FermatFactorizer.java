@@ -1,10 +1,10 @@
 import java.math.BigInteger;
 
-public class FermatFactorizer {
+class FermatFactorizer {
 
     private static final BigInteger TWO = BigInteger.ONE.add(BigInteger.ONE);
 
-    public static BigInteger factorize(BigInteger input) {
+    static BigInteger factorize(BigInteger input) {
         BigInteger a = sqrt(input);
         BigInteger b = a.multiply(a).subtract(input);
         BigInteger bsqrt = sqrt(b);
@@ -25,9 +25,7 @@ public class FermatFactorizer {
 
         if (sqrt(b).pow(2).equals(b)) {
             result = aMinusB;
-        }
-
-        else {
+        } else {
             boolean solved = false;
             BigInteger p = aMinusB.add(TWO);
 
@@ -47,22 +45,18 @@ public class FermatFactorizer {
         return result;
     }
 
-
     private static BigInteger sqrt(BigInteger n) {
-        BigInteger n1 = BigInteger.ZERO;
-        BigInteger n2 = n1.setBit(2 * n.bitLength());
-        BigInteger n3;
-
-        do {
-            n3 = n1.add(n2);
-            if (n3.compareTo(n) != 1) {
-                n = n.subtract(n3);
-                n1 = n3.add(n2);
+        BigInteger a = BigInteger.ONE;
+        BigInteger b = n.shiftRight(5).add(BigInteger.valueOf(8));
+        while (b.compareTo(a) >= 0) {
+            BigInteger mid = a.add(b).shiftRight(1);
+            if (mid.multiply(mid).compareTo(n) > 0) {
+                b = mid.subtract(BigInteger.ONE);
+            } else {
+                a = mid.add(BigInteger.ONE);
             }
-            n1 = n1.shiftRight(1);
-            n2 = n2.shiftRight(2);
-        } while (n2.bitCount() != 0);
-
-        return n1;
+        }
+        return a.subtract(BigInteger.ONE);
     }
+
 }
