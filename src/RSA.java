@@ -1,9 +1,6 @@
 import java.math.BigInteger;
-import java.security.SecureRandom;
 
 public class RSA {
-    private static final SecureRandom secureRandom = new SecureRandom();
-
     private BigInteger privateKey;
     private BigInteger publicKey;
     private BigInteger n;
@@ -32,51 +29,24 @@ public class RSA {
         return cipherText.modPow(privateKey, n);
     }
 
-    public BigInteger getPrivateKey() {
+    BigInteger getPrivateKey() {
         return privateKey;
     }
 
-    public void setPrivateKey(BigInteger privateKey) {
-        this.privateKey = privateKey;
-    }
-
-    public BigInteger getPublicKey() {
+    BigInteger getPublicKey() {
         return publicKey;
     }
 
-    public void setPublicKey(BigInteger publicKey) {
-        this.publicKey = publicKey;
-    }
-
-    public BigInteger getN() {
+    BigInteger getN() {
         return n;
     }
 
-    public void setN(BigInteger n) {
-        this.n = n;
-    }
-
-    public BigInteger getPhi() {
-        return phi;
-    }
-
-    public void setPhi(BigInteger phi) {
-        this.phi = phi;
-    }
-
-    public BigInteger getP() {
+    BigInteger getP() {
         return p;
     }
 
-    public void setP(BigInteger p) {
-        this.p = p;
-    }
-
-    public BigInteger getQ() {
+    BigInteger getQ() {
         return q;
     }
 
-    public void setQ(BigInteger q) {
-        this.q = q;
-    }
 }
